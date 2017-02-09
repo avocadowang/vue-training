@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="computed">
+        <p>原始数据:"{{message}}"</p>
+
+        <p>翻转后的数据:"{{reverseMessage}}"</p>
+
+        <p>{{now}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#computed',
+            data:{
+                message:"hello我叫大家都"
+            },
+            computed:{
+                //return的值作为reverseMessage的getter传入
+                reverseMessage:function () {
+                   var ddd = this.message.split('').reverse().join('');
+                    console.log(ddd)
+                    return ddd;
+                },
+                now:function () {
+                    return Date.now()
+                }
+            }
+        })
+    </script>
+</body>
+</html>

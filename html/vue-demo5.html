@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>处理用户输入</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app-5">
+        <p>{{message}}</p>
+        <span>{{hello}}</span>
+        <button v-on:click="reverseMessage">reverse Message</button>
+    </div>
+    <script>
+        var app5 = new Vue({
+            el:'#app-5',
+            data:{
+                message:'点击我获  取内容太',
+                hello:'并及时答复是咖啡就是'
+            },
+            methods:{
+                reverseMessage:function(){
+                    vue的this指的是vue对象名所对应的对象
+                    this.hello = this.hello.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div v-bind:style="{ color:color,fontSize:fontSize+'px' }">{{message}}</div>
+    <script>
+        var vm = new Vue({
+            el:"div",
+            data:{
+                color:"red",
+                fontSize:30,
+                message:"你瞅啥,瞅你咋地"
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <child message="hello!"></child>
+</body>
+<script>
+    //注册组件
+    Vue.component('child',{
+        //声明props,
+        props: ['message'],
+        // 就像 data 一样，prop 可以用在模板内
+        // 同样也可以在 vm 实例中像 “this.message” 这样使用
+        template: '<span>{{ message }}</span>'
+    })
+    new Vue({
+        el:"child"
+    })
+</script>
+</html>

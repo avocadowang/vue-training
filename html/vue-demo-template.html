@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="vm">
+    <my-component></my-component>
+    </div>
+
+<script>
+    //注册组件
+    Vue.component('my-component', {
+        template: '<button>{{ message }}</button>',
+        data: function(){
+            return {
+                message:"我是一个组件"
+            }
+
+        }
+    })
+    //实例化
+    new Vue({
+        el:"#vm"
+    })
+
+</script>
+</body>
+</html>

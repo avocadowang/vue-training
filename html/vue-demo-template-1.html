@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="vm">
+        <simple-conunter></simple-conunter>
+        <simple-conunter></simple-conunter>
+        <simple-conunter></simple-conunter>
+    </div>
+    <script>
+       // var data = {counter:0}
+        Vue.component('simple-conunter',{
+            template:'<button v-on:click="counter+= 1">{{counter}}</button>',
+            //data是一个函数.因此vue不会警告
+            //但是我们为每一个组件返回了同一个对象
+            data:function(){
+                return {
+                    counter:0
+                }
+            }
+
+        })
+        new Vue({
+            el:"#vm"
+        })
+
+    </script>
+</body>
+</html>

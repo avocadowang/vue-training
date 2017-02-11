@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div>
+        <!--value是被选中后picked取到的值-->
+        <!--multiple可同时上传多个文件-->
+        <input type="radio" id="one"  v-model="picked">
+        <input type="radio" id="one"  v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Twwo" v-model="picked">
+        <input type="radio" id="two" value="Twwo" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"div",
+            data:{
+                picked:[]
+            }
+
+        })
+    </script>
+</body>
+</html>

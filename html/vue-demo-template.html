@@ -14,9 +14,10 @@
     //注册组件
     Vue.component('my-component', {
         template: '<button>{{ message }}</button>',
+        //祖册组件是的data必须是函数,与实例化时使用的不同
         data: function(){
             return {
-                message:"我是一个组件"
+                message:"我是一个可爱的组件"
             }
 
         }

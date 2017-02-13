@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue版todolist</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<style>
+    .isFinish {
+        background-color: #d58512 !important;
+    }
+
+    .itemcount {
+        display: block;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 10px;
+        float: left;
+        background-color: #d9edf7;
+    }
+</style>
+<body>
+<div class="container text-center" id="app">
+
+    <h2>{{title}}</h2>
+    <div class="row">
+        <div class="col-md-7">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="toitem">添加任务事项</label>
+                    <input class="form-control" type="text" id="toitem" v-model="newitem" @keyup.enter="addItem()">
+                </div>
+                <!--  <div class="form-group text-left">
+                    <button class="btn btn-primary btn-sm">确认添加</button>
+                  </div>-->
+                <div class="list-group text-left form-group" style="margin-top: 2em;">
+                    <a href="#" class="list-group-item active text-left">
+                        任务清单：
+                    </a>
+
+                    <a href="#" v-for="item in items" class="list-group-item" v-on:click="toogleFinsih(item)">
+                        <span class="itemcount">{{item.id}}</span>
+                        {{item.lable}}
+                        <span class="badge" v-bind:class="{isFinish:item.isFinish}">√</span>
+                    </a>
+
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">任务计划：</div>
+                <div class="panel-body">
+                    请在一周内完成这些计划！
+                </div>
+                <div class="panel-footer text-right">
+                    <button class="btn btn-info btn-sm" @click="clearItem">清空任务计划</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //该网站的localStorage的键值，用于存放数据
+    var todoList = 'todolist';
+    //对localStorage的封装
+    var lsp = (function () {
+        return ({
+            add: function (dataval) {
+                //添加数据，键为todolist
+                localStorage.setItem(todoList, JSON.stringify(dataval));
+            },
+            get: function () {
+                //读取键为todolist的数据
+                return JSON.parse(localStorage.getItem(todoList));
+            },
+            remove: function () {
+                //移除该站点下键为todolist的数据
+                localStorage.removeItem(todoList);
+            },
+            clear: function () {
+                //清空该站点下的所有localStorage的数据
+                localStorage.clear();
+            }
+        });
+    })();
+    var app = new Vue({
+        el: '#app',
+        data: {
+            title: '任务清单demo',
+            items: lsp.get() || [],//读取数据。如果没有数据赋值为数组[]
+            newitem: '' //要添加的数据
+        },
+        methods: {
+            addItem: function () {
+                var that = this;
+                this.items.push({
+                    id: that.items.length + 1,
+                    lable: that.newitem,
+                    isFinish: false
+                });
+                lsp.add(this.items);
+                this.newitem = '';
+            },
+            toogleFinsih: function (item) {
+                item.isFinish = !item.isFinish;
+            },
+            clearItem: function () {
+
+                this.items = [];
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

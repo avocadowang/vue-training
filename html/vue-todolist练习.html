@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue版todolist</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .isFinish {
+            background-color: #d58512 !important;
+        }
+
+        .itemcount {
+            display: block;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 10px;
+            float: left;
+            background-color: #d9edf7;
+        }
+    </style>
+</head>
+<body>
+<div id="todolist" class="container text-center">
+    <h2 class="text-center">{{title}}</h2>
+    <div class="row col-lg-12">
+        <div class="col-lg-7">
+            <form action="" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="toitem">{{addmask}}</label>
+                    <input class="form-control" type="text" id="toitem" @keyup.enter="addItem()">
+                </div>
+
+                <div class="list-group text-left form-group" style="margin-top: 2em;">
+                    <a href="#" class="list-group-item active text-left">
+                        任务清单：
+                    </a>
+
+                    <a href="#" v-for="item in items" class="list-group-item" v-on:click="toogleFinsih(item)">
+                        <span class="itemcount">{{item.id}}</span>
+                        {{item.lable}}
+                        <span class="badge" v-bind:class="{isFinish:item.isFinish}">√</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">任务计划</div>
+                <div class="panel-body">请在计划时间内完成任务</div>
+                <div class="panel-footer">
+                    <button class="btn btn-info btn-sm" v-on:click="clearItem">清空任务计划</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //该网站的localStorage的key值,用于存放数据
+    var todoKey = 'todokey';
+    //对localStorage进行封装
+    var lsp = (function(){
+        return ({
+            //添加数据,键为todkey
+            add: function(dataval){
+                localStorage.setItem(todoKey,JSON.stringify(dataval));
+            },
+            get: function(){
+                //读取键为todoKey的数据
+                return JSON.parse(localStorage.getItem(todoKey));
+            },
+            remove: function(){
+                //移除键为todoKey的localStorage
+                localStorage.removeItem(todoKey);
+            },
+            clear:function(){
+                //清空localStorage
+                localStorage.clear();
+            }
+        })
+    })
+    var todolist = new Vue({
+        el: "#todolist",
+        data: {
+            title: "任务清单Demo",
+            addmask: "添加任务事件"
+        },
+        methods: {}
+    })
+</script>
+</body>
+</html>

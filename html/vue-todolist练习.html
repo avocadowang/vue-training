@@ -60,21 +60,21 @@
 </div>
 <script>
     //该网站的localStorage的key值,用于存放数据
-    var todoKey = 'todokey';
+    var todoList = 'todolist';
     //对localStorage进行封装
     var lsp = (function(){
         return ({
             //添加数据,键为todkey
             add: function(dataval){
-                localStorage.setItem(todoKey,JSON.stringify(dataval));
+                localStorage.setItem(todoList,JSON.stringify(dataval));
             },
             get: function(){
-                //读取键为todoKey的数据
-                return JSON.parse(localStorage.getItem(todoKey));
+                //读取键为todoList的数据
+                return JSON.parse(localStorage.getItem(todoList));
             },
             remove: function(){
-                //移除键为todoKey的localStorage
-                localStorage.removeItem(todoKey);
+                //移除键为todoList的localStorage
+                localStorage.removeItem(todoList);
             },
             clear:function(){
                 //清空localStorage
